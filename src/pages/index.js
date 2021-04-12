@@ -1,14 +1,14 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { graphql } from "gatsby"
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
+    <h1>Hi {data.contentfulPage.title}</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
     <StaticImage
@@ -26,4 +26,11 @@ const IndexPage = () => (
   </Layout>
 )
 
+export const query = graphql`
+  {
+    contentfulPage(contentful_id: { eq: "33Nm2HvzxIq3zc7izx0mmw" }) {
+      title
+    }
+  }
+`
 export default IndexPage
